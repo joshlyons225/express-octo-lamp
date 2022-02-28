@@ -19,7 +19,7 @@ module.exports = app => {
 
         // create api GET function and convert notes to JSON
         app.get("/api/notes", function(req, res) {
-            res.JSON(notes);
+            res.json(notes);
         });
 
         // create api POST function and push to update database
@@ -31,6 +31,9 @@ module.exports = app => {
         });
 
         // create html GET function
+        app.get("/", function(req, res) {
+            res.sendFile(path.join(__dirname, "../public/index.html"));
+        });
 
         // create html POST function
 
