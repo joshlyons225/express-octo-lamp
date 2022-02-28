@@ -9,14 +9,22 @@ module.exports = app => {
         if (err) throw err;
         var notes = JSON.parse(data);
 
-    // create api GET function
+        // function to update database with new notes
+        function dbUpdate () {
+            fs.writeFile("db/db.json", JSON.stringify(notes, ''), err => {
+                if (err) throw err;
+                return true;
+            });
+        }
 
-    // create api POST function
+        // create api GET function
+
+        // create api POST function
 
 
-    // create html GET function
+        // create html GET function
 
-    // create html POST function
+        // create html POST function
 
     });
 }
