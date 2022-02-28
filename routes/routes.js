@@ -1,3 +1,4 @@
+const { randomUUID } = require('crypto');
 const fs = require('fs');
 const path = require('path');
 
@@ -24,7 +25,7 @@ module.exports = app => {
 
         // create api POST function and push to update database
         app.post("api/notes", function(req, res) {
-            const noteAdd = req.body;
+            const noteAdd = (req.body, "review_id: "+randomUUID);
             notes.push(noteAdd);
             dbUpdate();
             return console.log("New note was created: "+noteAdd.title);
@@ -34,9 +35,6 @@ module.exports = app => {
         app.get("/", function(req, res) {
             res.sendFile(path.join(__dirname, "../public/index.html"));
         });
-
-        // create html POST function
-
     });
 }
 
