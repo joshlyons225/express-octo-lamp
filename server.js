@@ -14,5 +14,5 @@ require('./routes/routes')(app);
 
 // set server PORT listener
 app.listen(PORT, () => {
-    console.log(`API server now on port ${PORT}`);
+    console.log(`API server rocking on port ${PORT}`);
 });

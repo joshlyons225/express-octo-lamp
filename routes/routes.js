@@ -4,23 +4,31 @@ const path = require('path');
 // export app function
 module.exports = app => {
 
-    // read notes from database
+    // pull notes from database annnd convert to JSON
     fs.readFile("db/db.json", "utf8", (err, data) => {
         if (err) throw err;
-        var notes = JSON.parse(data);
+        const notes = JSON.parse(data);
 
         // function to update database with new notes
         function dbUpdate () {
-            fs.writeFile("db/db.json", JSON.stringify(notes, ''), err => {
+            fs.writeFile("db/db.json", JSON.stringify(notes, null, 2), err => {
                 if (err) throw err;
                 return true;
             });
         }
 
-        // create api GET function
+        // create api GET function and convert notes to JSON
+        app.get("/api/notes", function(req, res) {
+            res.JSON(notes);
+        });
 
-        // create api POST function
-
+        // create api POST function and push to update database
+        app.post("api/notes", function(req, res) {
+            const noteAdd = req.body;
+            notes.push(noteAdd);
+            dbUpdate();
+            return console.log("New note was created: "+noteAdd.title);
+        });
 
         // create html GET function
 
