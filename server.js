@@ -1,7 +1,5 @@
 // express requirements
 const express = require('express');
-const fs = require('fs');
-const path = require('path');
 
 // set PORT and app parameters
 const PORT = process.env.PORT || 3001;
@@ -10,7 +8,7 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// point to routes
+// point to routes and app function within routes.js
 require('./routes/routes')(app);
 
 
