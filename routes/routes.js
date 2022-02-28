@@ -25,13 +25,19 @@ module.exports = app => {
 
         // create api POST function and push to update database
         app.post("api/notes", function(req, res) {
-            const noteAdd = (req.body, "review_id: "+randomUUID);
+            const noteAdd = (req.body, "note_id: "+randomUUID);
             notes.push(noteAdd);
             dbUpdate();
-            return console.log("New note was created: "+noteAdd.title);
+            console.log("New note was created");
+            res.json(noteAdd);
         });
 
-        // create html GET function
+        // create GET function for notes.html
+        app.get("/notes", function(req, res) {
+            res.sendFile(path.join(__dirname, "../public/notes.html"));
+        });
+
+        // create GET function got index.html
         app.get("/", function(req, res) {
             res.sendFile(path.join(__dirname, "../public/index.html"));
         });
