@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // point to routes and app function within routes.js
-require('./routes/routes', app);
+require('./routes/routes')(app);
 
 
 // set server PORT listener
