@@ -19,7 +19,7 @@ module.exports = app => {
         }
 
         // create api GET function and convert notes to JSON
-        app.get("/api/notes", function(req, res) {
+        app.get("/notes", function(req, res) {
             res.json(notes);
         });
 
