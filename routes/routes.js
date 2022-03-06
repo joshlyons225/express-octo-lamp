@@ -21,7 +21,6 @@ module.exports = app => {
             req.body.id = uuidv4();
             notes.push(newNote);
             dbUpdate();
-            return console.log("Saved note: "+newNote.title);
         });
 
         // GET note by id
@@ -33,7 +32,6 @@ module.exports = app => {
         app.delete("/api/notes/:id", function(req, res) {
             notes.splice(req.params.id, 1);
             dbUpdate();
-            console.log("Note deleted successfully.");
         });
 
         // show notes.html
