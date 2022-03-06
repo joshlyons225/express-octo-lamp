@@ -24,6 +24,18 @@ module.exports = app => {
             return console.log("Saved note: "+newNote.title);
         });
 
+        // GET note by id
+        app.get("/api/notes/:id", function(req, res) {
+            res.json(notes[req.params.id]);
+        });
+
+        // delete note by id and update database
+        app.delete("/api/notes/:id", function(req, res) {
+            notes.splice(req.params.id, 1);
+            dbUpdate();
+            console.log("Note deleted successfully.");
+        });
+
         // show notes.html
         app.get('/notes', function (req, res) {
             res.sendFile(path.join(__dirname, "../public/notes.html"));
