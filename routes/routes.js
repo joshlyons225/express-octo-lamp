@@ -25,7 +25,7 @@ module.exports = app => {
 
         // create api POST function and push to update database
         app.post("api/notes", function(req, res) {
-            const newNote = (req.body, "note_id: "+randomUUID);
+            const newNote = req.body;
             notes.push(newNote);
             dbUpdate();
             console.log("New note was created");
