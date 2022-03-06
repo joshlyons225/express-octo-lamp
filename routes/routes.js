@@ -17,10 +17,10 @@ module.exports = app => {
 
         // create api POST function and push to update database
         app.post("/api/notes", function(req, res) {
-            const newNote = req.body;
             req.body.id = uuidv4();
-            notes.push(newNote);
-            dbUpdate();
+            notes.push(req.body);
+            res.sendFile(__dirname + notes);
+            res.json(req.body);
         });
 
         // GET note by id
@@ -31,7 +31,8 @@ module.exports = app => {
         // delete note by id and update database
         app.delete("/api/notes/:id", function(req, res) {
             notes.splice(req.params.id, 1);
-            dbUpdate();
+            res.sendFile(__dirname + notes);
+            res.json(req.body);
         });
 
         // show notes.html
@@ -43,14 +44,6 @@ module.exports = app => {
         app.get("/", function(req, res) {
             res.sendFile(path.join(__dirname, "../public/index.html"));
         });
-
-        // function to update database with new notes
-        function dbUpdate() {
-            fs.writeFile("db/db.json", JSON.stringify(notes, null, 2), err => {
-                if (err) throw err;
-                return true;
-            });
-        }
     });
 }
 
