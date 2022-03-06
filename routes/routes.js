@@ -24,17 +24,12 @@ module.exports = app => {
         });
 
         // create api POST function and push to update database
-        app.post("api/notes", function(req, res) {
+        app.post("/notes", function(req, res) {
             const newNote = req.body;
+            req.body.id = randomUUID;
             notes.push(newNote);
-            dbUpdate();
-            console.log("New note was created");
-            return console.log(newNote);
-        });
-
-        // create GET function for notes.html
-        app.get("/notes", function(req, res) {
-            res.sendFile(path.join(__dirname, "../public/notes.html"));
+            res.sendFile(__dirname + notes);
+            res.json(req.body);
         });
 
         // create GET function for index.html
