@@ -25,11 +25,11 @@ module.exports = app => {
 
         // create api POST function and push to update database
         app.post("api/notes", function(req, res) {
-            const noteAdd = (req.body, "note_id: "+randomUUID);
-            notes.push(noteAdd);
+            const newNote = (req.body, "note_id: "+randomUUID);
+            notes.push(newNote);
             dbUpdate();
             console.log("New note was created");
-            res.json(noteAdd);
+            return console.log(newNote);
         });
 
         // create GET function for notes.html
@@ -37,7 +37,7 @@ module.exports = app => {
             res.sendFile(path.join(__dirname, "../public/notes.html"));
         });
 
-        // create GET function got index.html
+        // create GET function for index.html
         app.get("/", function(req, res) {
             res.sendFile(path.join(__dirname, "../public/index.html"));
         });
