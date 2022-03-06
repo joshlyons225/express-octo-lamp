@@ -1,4 +1,4 @@
-const { randomUUID } = require('crypto');
+const { v4: uuidv4 } = require('uuid');
 const fs = require('fs');
 const path = require('path');
 
@@ -18,7 +18,7 @@ module.exports = app => {
         // create api POST function and push to update database
         app.post("/api/notes", function(req, res) {
             const newNote = req.body;
-            req.body.id = randomUUID;
+            req.body.id = uuidv4();
             notes.push(newNote);
             dbUpdate();
             return console.log("Saved note: "+newNote.title);
